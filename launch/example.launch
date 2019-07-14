@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="manager_name" default="pcl_manager"/>
+    <arg name="manager_threads" default="4" />
+    <arg name="crop_outside" default="true"/>
+
+    <node pkg="nodelet" type="nodelet" name="$(arg manager_name)" args="manager" output="screen">
+        <param name="num_worker_threads" value="$(arg manager_threads)" />
+    </node>
+    
+    <node name="crop_hull_filter" pkg="nodelet" type="nodelet" args="load pcl/CropHullFilter $(arg manager_name)">
+        <rosparam file="$(find crop_hull_filter)/config/example.yaml" command="load"/>
+        <param name="crop_outside" value="$(arg crop_outside)"/>
+    </node>
+</launch>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>crop_hull_filter</name>
+  <version>0.0.0</version>
+  <description>The crop_hull_filter package</description>
+
+  <maintainer email="ms.kataoka@gmail.com">masaya kataoka</maintainer>
+
+  <license>Apache 2.0</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>nodelet</build_depend>
+  <build_depend>pcl_ros</build_depend>
+  <build_depend>pluginlib</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>tf2_eigen</build_depend>
+  <build_depend>tf2_ros</build_depend>
+  <build_depend>visualization_msgs</build_depend>
+  <build_export_depend>nodelet</build_export_depend>
+  <build_export_depend>pcl_ros</build_export_depend>
+  <build_export_depend>pluginlib</build_export_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>sensor_msgs</build_export_depend>
+  <build_export_depend>tf2_eigen</build_export_depend>
+  <build_export_depend>tf2_ros</build_export_depend>
+  <build_export_depend>visualization_msgs</build_export_depend>
+  <exec_depend>nodelet</exec_depend>
+  <exec_depend>pcl_ros</exec_depend>
+  <exec_depend>pluginlib</exec_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>tf2_eigen</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>visualization_msgs</exec_depend>
+
+  <export>
+    <nodelet plugin="${prefix}/nodelet.xml"/>
+  </export>
+</package>
