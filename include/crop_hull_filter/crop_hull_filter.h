@@ -38,6 +38,7 @@ namespace pcl_ros
         double marker_color_r_;
         double marker_color_g_;
         double marker_color_b_;
+        std::string output_frame_id_;
         ros::Subscriber pointcloud_sub_;
         ros::Publisher marker_pub_;
         void pointCloudCallback(const sensor_msgs::PointCloud2::ConstPtr cloud);

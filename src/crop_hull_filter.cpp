@@ -23,6 +23,7 @@ namespace pcl_ros
         //double crop_height;
         //pnh_->param<double>("crop_height", crop_height, 1.0);
         pnh_->param<std::string>("frame_id", frame_id_, "map");
+        pnh_->param<std::string>("output_frame_id", output_frame_id_, frame_id_);
         pnh_->param<bool>("crop_outside", crop_outside_, false);
         pnh_->param<double>("marker_line_width", marker_line_width_, 1.0);
         pnh_->param<double>("marker_color_r", marker_color_r_, 1.0);
@@ -95,7 +96,7 @@ namespace pcl_ros
             geometry_msgs::TransformStamped transform_stamped 
                 = buffer_.lookupTransform(frame_id_, cloud->header.frame_id, ros::Time(0), ros::Duration(2.0));
             geometry_msgs::TransformStamped transform_stamped_inv
-                = buffer_.lookupTransform(cloud->header.frame_id, frame_id_, ros::Time(0), ros::Duration(2.0));
+                = buffer_.lookupTransform(output_frame_id_, frame_id_, ros::Time(0), ros::Duration(2.0));
             Eigen::Matrix4f mat = tf2::transformToEigen(transform_stamped.transform).matrix().cast<float>();
             Eigen::Matrix4f mat_inv = tf2::transformToEigen(transform_stamped_inv.transform).matrix().cast<float>();
             sensor_msgs::PointCloud2 cloud_transformed;
@@ -105,9 +106,9 @@ namespace pcl_ros
             filter_.setInputCloud(pcl_cloud);
             pcl::PointCloud<pcl::PointXYZ>::Ptr filtered(new pcl::PointCloud<pcl::PointXYZ>());
             filter_.filter(*filtered);
-            sensor_msgs::PointCloud2 cloud_output;
-            pcl::toROSMsg(*filtered, cloud_output);
-            pcl_ros::transformPointCloud(mat_inv, cloud_output, cloud_output);
+            sensor_msgs::PointCloud2 cloud_filtered,cloud_output;
+            pcl::toROSMsg(*filtered, cloud_filtered);
+            pcl_ros::transformPointCloud(mat_inv, cloud_filtered, cloud_output);
             pub_output_.publish(cloud_output);
             marker_pub_.publish(marker_);
         }
