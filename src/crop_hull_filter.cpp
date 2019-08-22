@@ -18,10 +18,6 @@ namespace pcl_ros
         hull_cloud_->clear();
         pnh_->getParam("",parameters_);
         XmlRpc::XmlRpcValue points_param = parameters_["points"];
-        //double z;
-        //pnh_->param<double>("z", z, 0.0);
-        //double crop_height;
-        //pnh_->param<double>("crop_height", crop_height, 1.0);
         pnh_->param<std::string>("frame_id", frame_id_, "map");
         pnh_->param<std::string>("output_frame_id", output_frame_id_, frame_id_);
         pnh_->param<bool>("crop_outside", crop_outside_, false);
@@ -48,10 +44,7 @@ namespace pcl_ros
             pcl::PointXYZ p;
             p.x = x;
             p.y = y;
-            //p.z = z + crop_height*0.5;
             hull_cloud_->push_back(p);
-            //p.z = z - crop_height*0.5;
-            //hull_cloud_->push_back(p);
             geometry_msgs::Point point;
             point.x = x;
             point.y = y;
